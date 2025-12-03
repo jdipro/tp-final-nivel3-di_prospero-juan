@@ -1,7 +1,9 @@
-﻿using Dominio;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient; //hacer uso de funcionalidades relacionadas con la red (por ejemplo, descargando datos desde una API, enviando correos electrónicos, o similar). 
+using Dominio;
+
 
 namespace Negocio
 {
