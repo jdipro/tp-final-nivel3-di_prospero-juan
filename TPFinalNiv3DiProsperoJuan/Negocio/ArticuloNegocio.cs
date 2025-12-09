@@ -20,7 +20,7 @@ namespace Negocio
 
             try
             {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true";
+                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id AS IdMarca, M.Descripcion AS Empresa, C.Id AS IdCategoria, C.Descripcion AS Clasificacion, A.ImagenUrl, A.Precio FROM ARTICULOS A JOIN CATEGORIAS C ON A.IdCategoria = C.Id JOIN MARCAS M ON  A.IdMarca = M.Id";
                 comando.Connection = conexion;
@@ -66,6 +66,48 @@ namespace Negocio
             }
 
         }
+
+        //Lógica para utilizar Stored Procedures.
+        public List<Articulo> ListarConSP()
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //string consulta = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Empresa, C.Descripcion Clasificacion, A.ImagenUrl, A.Precio from ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id And A.IdMarca = M.Id";
+
+                //datos.setearConsulta(consulta);
+
+                datos.setearProcedimiento("storedListar");
+                
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+
+                    aux.Id = (int)datos.Lector["Id"];      //lector.GetInt32(0);
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Empresa = new Marca();
+                    aux.Empresa.Descripcion = (string)datos.Lector["Empresa"];
+                    aux.Clasificacion = new Categoria();
+                    aux.Clasificacion.Descripcion = (string)datos.Lector["Clasificacion"];
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    aux.Precio = datos.Lector.IsDBNull(datos.Lector.GetOrdinal("Precio")) ? 0m : datos.Lector.GetDecimal(datos.Lector.GetOrdinal("Precio"));
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al ListarConSP", ex);
+            }
+        }
+
+
 
         //Lógica para conectar a la DB y Agregar articulos.
         public void Agregar(Articulo nuevo)

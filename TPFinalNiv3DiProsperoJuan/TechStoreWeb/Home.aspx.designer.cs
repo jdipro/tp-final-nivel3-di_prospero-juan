@@ -11,7 +11,7 @@ namespace TechStoreWeb
 {
 
 
-    public partial class Default
+    public partial class Home
     {
     }
 }
