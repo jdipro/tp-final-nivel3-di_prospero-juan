@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArticulosLista.aspx" />
-    <Content Include="DetalleArticulo.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="FormularioArticulos.aspx" />
@@ -86,13 +85,6 @@
     </Compile>
     <Compile Include="ArticulosLista.aspx.designer.cs">
       <DependentUpon>ArticulosLista.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="DetalleArticulo.aspx.cs">
-      <DependentUpon>DetalleArticulo.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="DetalleArticulo.aspx.designer.cs">
-      <DependentUpon>DetalleArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Error.aspx.cs">
       <DependentUpon>Error.aspx</DependentUpon>

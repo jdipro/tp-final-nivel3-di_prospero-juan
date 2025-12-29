@@ -12,9 +12,9 @@ namespace TechStoreWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.ListarConSP();
-            dgvArticulos.DataBind();                        //enlace de datos.
+           ArticuloNegocio negocio = new ArticuloNegocio();
+           dgvArticulos.DataSource = negocio.ListarConSP();
+           dgvArticulos.DataBind();                        //enlace de datos web a db
         }
     }
 }

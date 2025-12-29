@@ -39,7 +39,7 @@ namespace Negocio
                     aux.Nombre = (string)lector["Nombre"];
                     aux.Descripcion = (string)lector["Descripcion"];
 
-                    aux.Empresa = new Marca();
+                    aux.Empresa= new Marca();
                     aux.Empresa.Id = (int)lector["IdMarca"];
                     aux.Empresa.Descripcion = (string)lector["Empresa"];
 
