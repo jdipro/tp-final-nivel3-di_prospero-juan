@@ -110,14 +110,13 @@ namespace Negocio
 
 
         //Lógica para conectar a la DB y Agregar articulos.
-        public void Agregar(Articulo nuevo)
+        public void AgregarConSP(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
-            {   //seteo los parámetros de esta manera para evitar confusiones.
-                datos.setearConsulta("INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, ImagenUrl, Precio) VALUES(@Codigo, @Nombre, @Descripcion, @IdMarca, @IdCategoria, @ImagenUrl, @Precio)");
-
+            {   
+                datos.setearProcedimiento("storedAltaArticulos");
 
                 datos.setearParametro("@Codigo", nuevo.Codigo);
                 datos.setearParametro("@Nombre", nuevo.Nombre);

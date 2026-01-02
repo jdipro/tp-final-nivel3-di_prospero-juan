@@ -14,6 +14,7 @@
                         <h5 class="card-title"><%#Eval("Nombre") %></h5>
                         <p class="card-text"><%#Eval("Descripcion") %></p>
                         <p class="card-text"><%#Eval("Precio") %></p>
+                         <a href="DetalleArticulo.aspx?id=<%#Eval("Id") %>">Info</a>
                         
                      </div>
                  </div>

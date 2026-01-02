@@ -24,7 +24,7 @@ namespace Negocio
 
                 while (datos.Lector.Read()) //leer las propiedades y tomar esos datos, como el otro archivo pero es mucho menos.
                 {
-                    Marca aux = new Marca(); //creo una instancia de la clase elemento y agrego lo que agregamos en otros archivos.
+                    Marca aux = new Marca(); //creo una instancia de la clase marca y agrego lo que agregamos en otros archivos.
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 

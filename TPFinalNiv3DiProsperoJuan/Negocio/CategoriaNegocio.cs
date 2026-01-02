@@ -22,9 +22,9 @@ namespace Negocio
                 datos.setearConsulta("Select Id, Descripcion From CATEGORIAS");
                 datos.ejecutarLectura();
 
-                while (datos.Lector.Read()) //leer las propiedades y tomar esos datos, como el el otro archivo pero es mucho menos.
+                while (datos.Lector.Read()) //leer las propiedades y tomar esos datos, como el otro archivo pero es mucho menos.
                 {
-                    Categoria aux = new Categoria(); //creo una instancia de la clase elemento y agrego lo que agregamos en otros archivos.
+                    Categoria aux = new Categoria(); //creo una instancia de la clase categoria y agrego lo que agregamos en otros archivos.
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
 
