@@ -18,8 +18,13 @@ namespace TechStoreWeb
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulo = negocio.ListarConSP();
             //configuracón del repetidor.
-            repRepetidor.DataSource = ListaArticulo;
-            repRepetidor.DataBind();
+            if (!IsPostBack)
+            {
+                repRepetidor.DataSource = ListaArticulo;
+                repRepetidor.DataBind();
+            }
+            
+
         }
     }
 }

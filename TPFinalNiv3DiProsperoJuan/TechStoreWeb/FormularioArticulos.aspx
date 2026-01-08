@@ -28,7 +28,7 @@
             <div class="mb-3">
                 <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-primary" OnClick="btnAceptar_Click" runat="server" />
                 <a href="ArticulosLista.aspx">Cancelar</a>
-                <asp:Button Text="Inactivar" ID="btnInactivar" OnClick="btnInactivar_Click" CssClass="btn btn-warning" runat="server" />
+                
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                 <asp:TextBox runat="server"  ID="txtPrecio" CssClass="form-control" MaxLength="15" placeholder="Ej: 00.000,00" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecio" ErrorMessage="El precio es obligatorio." 
                  CssClass="text-danger" Display="Dynamic" />
-                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPrecio" ErrorMessage="Formato válido: 23.568,56"
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPrecio" ErrorMessage="Formato válido: 00.000,00"
                 CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d{1,3}(\.\d{3})*(,\d{2})$" />
             
             </div>
@@ -58,6 +58,25 @@
                         runat="server" ID="imgArticulo" Width="60%" />
                 </ContentTemplate>
             </asp:UpdatePanel>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                <ContentTemplate>
+                    <div class="mb-3">
+                        <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />          
+                    </div>
+
+                    <% if (ConfirmaEliminacion) { %>
+                        <div class="mb-3">
+                            <asp:CheckBox Text="Confirmar Eliminación" ID="chkConfirmaEliminacion" runat="server" />
+                            <asp:Button Text="Eliminar" ID="btnConfirmaEliminar" OnClick="btnConfirmaEliminar_Click" CssClass="btn btn-outline-danger" runat="server" />          
+                        </div>
+                    <% } %>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+           
         </div>
     </div>
 

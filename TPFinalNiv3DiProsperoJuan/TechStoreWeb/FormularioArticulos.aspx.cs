@@ -13,14 +13,19 @@ namespace TechStoreWeb
 {
     public partial class FormularioArticulos : System.Web.UI.Page
     {
+        public bool ConfirmaEliminacion { get; set; }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             txtId.Enabled = false;
+            ConfirmaEliminacion = false;
+
             try
-            {
+            {   //Configuración Inicial.
                 if (!IsPostBack) //traigo elementos de CategoriaNegocio para cargar los desplegables.
                 {
-                    //Categoria
+                    //Categoria - Desplegable.
                     CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
                     List<Categoria> categoria = categoriaNegocio.listar();
 
@@ -29,7 +34,7 @@ namespace TechStoreWeb
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
 
-                    //Marca
+                    //Marca - Desplegable.
                     MarcaNegocio marcaNegocio = new MarcaNegocio();
                     List<Marca> marca = marcaNegocio.listar();
 
@@ -37,6 +42,35 @@ namespace TechStoreWeb
                     ddlMarca.DataValueField = "Id";
                     ddlMarca.DataTextField = "Descripcion";
                     ddlMarca.DataBind();
+
+                    //Configuración para MODIFICAR un articulo.
+                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                    if (id != "" && !IsPostBack)
+                    {
+                        ArticuloNegocio negocio = new ArticuloNegocio();
+                        //List<Articulo> lista = negocio.listar(id);
+                        // Articulo seleccionado = lista[0];
+                        Articulo seleccionado = (negocio.listar(id))[0];
+
+                        //pre carga todos los campos para poder modificar.
+                        txtId.Text = id;
+                        txtCodigo.Text = seleccionado.Codigo;
+                        txtNombre.Text = seleccionado.Nombre;
+                        txtDescripcion.Text = seleccionado.Descripcion;
+                        txtImagenUrl.Text = seleccionado.ImagenUrl;
+
+                        //Precio
+                        txtPrecio.Text = seleccionado.Precio.ToString(
+                            "N2", new CultureInfo("es-AR"));
+
+                        //Desplegables.
+                        ddlCategoria.SelectedValue = seleccionado.Clasificacion.Id.ToString();
+                        ddlMarca.SelectedValue = seleccionado.Empresa.Id.ToString();
+                        //Forzado de carga de imagen.
+                        txtImagenUrl_TextChanged(sender, e);
+                    }
+
+
 
                 }
             }
@@ -62,6 +96,16 @@ namespace TechStoreWeb
                 //Resolución del problema con la coma en el tipo decimal/money:
                 //nuevo.Precio = decimal.Parse(txtPrecio.Text, CultureInfo.InvariantCulture);
 
+                //Desplegbles:
+                nuevo.Empresa = new Marca();
+                nuevo.Empresa.Id = int.Parse(ddlMarca.SelectedValue);
+
+                nuevo.Clasificacion = new Categoria();
+                nuevo.Clasificacion.Id = int.Parse(ddlCategoria.SelectedValue);
+                
+                //ImagenURl
+                nuevo.ImagenUrl =  txtImagenUrl.Text;
+
                 //Precio
                 decimal precio;
 
@@ -78,21 +122,18 @@ namespace TechStoreWeb
 
                 nuevo.Precio = precio;
 
-                //Formato:
-                
+            
 
-                //Imagen
-                nuevo.ImagenUrl = txtImagenUrl.Text;
+                //Guardar nuevo artículo + Modificación de Artículo:
+                if (Request.QueryString["id"] != null) //si no está null es que el pedido es para modificar.
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]); //int.Parse(txtId.Text)
+                    negocio.ModificarConSP(nuevo);
+                }
+                else
+                    negocio.AgregarConSP(nuevo);
 
-                //Desplegbles:
-                nuevo.Empresa = new Marca();
-                nuevo.Empresa.Id = int.Parse(ddlMarca.SelectedValue);
-
-                nuevo.Clasificacion = new Categoria();
-                nuevo.Clasificacion.Id = int.Parse(ddlCategoria.SelectedValue);
-                
-                //Guardar nuevo artículo y redirección:
-                negocio.AgregarConSP(nuevo);
+                //Redireccionamiento.
                 Response.Redirect("ArticulosLista.aspx", false); 
 
 
@@ -107,14 +148,36 @@ namespace TechStoreWeb
             }
         }
 
-        protected void btnInactivar_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
+        {  
+                imgArticulo.ImageUrl = txtImagenUrl.Text; 
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            imgArticulo.ImageUrl = txtImagenUrl.Text;
+            ConfirmaEliminacion = true;
+        }
+
+        protected void btnConfirmaEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmaEliminacion.Checked)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.Eliminar(int.Parse(txtId.Text));
+                    Response.Redirect("ArticulosLista.aspx");
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Negocio
     {
 
         //Lógica para conectar a la DB y Leer artículos..
-        public List<Articulo> listar()  //preparo conexion a la db.
+        public List<Articulo> listar(string id = "")  //preparo conexion a la db.
         {   
             List<Articulo> lista = new List<Articulo>();
             SqlConnection conexion = new SqlConnection();
@@ -22,7 +22,9 @@ namespace Negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id AS IdMarca, M.Descripcion AS Empresa, C.Id AS IdCategoria, C.Descripcion AS Clasificacion, A.ImagenUrl, A.Precio FROM ARTICULOS A JOIN CATEGORIAS C ON A.IdCategoria = C.Id JOIN MARCAS M ON  A.IdMarca = M.Id";
+                comando.CommandText = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Id AS IdMarca, M.Descripcion AS Empresa, C.Id AS IdCategoria, C.Descripcion AS Clasificacion, A.ImagenUrl, A.Precio FROM ARTICULOS A JOIN CATEGORIAS C ON A.IdCategoria = C.Id JOIN MARCAS M ON  A.IdMarca = M.Id ";
+                if (id != "")
+                    comando.CommandText += " and A.Id = " + id;               
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader(); //realizo un lectura de esos datos.
@@ -107,6 +109,7 @@ namespace Negocio
             }
         }
 
+       
 
 
         //Lógica para conectar a la DB y Agregar articulos.
@@ -169,6 +172,43 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        //Lógica para Modificar con StoredPreccedure.
+        public void ModificarConSP(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {   //seteo los parámetros de esta manera para evitar confusiones.
+                datos.setearProcedimiento("storedModificarArticulo");
+
+                datos.setearParametro("@id", nuevo.Id);
+                datos.setearParametro("@Codigo", nuevo.Codigo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@IdMarca", nuevo.Empresa.Id);
+                datos.setearParametro("@IdCategoria", nuevo.Clasificacion.Id);
+                datos.setearParametro("@ImagenUrl", nuevo.ImagenUrl);
+                datos.setearParametro("@Precio", nuevo.Precio);
+                
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al conectarse a la base de datos para modificar un artículo: {ex.Message}");
+
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+            
+        }
+
+
 
         //Lógica para conectar a la DB y Filtrar artículos en filtro espcial.
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
