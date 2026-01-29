@@ -219,18 +219,18 @@ namespace Negocio
             {
                 string consulta = "Select A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Empresa, C.Descripcion Clasificacion, A.ImagenUrl, A.Precio from ARTICULOS A, CATEGORIAS C, MARCAS M Where A.IdCategoria = C.Id And A.IdMarca = M.Id And ";
                 
-                if (campo == "Nombre")
+                if (campo == "Clasificación")
                 {
                     switch (criterio)
                     {
                         case "Comienza con":
-                            consulta += "A.Nombre like '" + filtro + "%'";
+                            consulta += "C.Descripcion like '" + filtro + "%'";
                             break;
                         case "Termina con":
-                            consulta += "A.Nombre like '%" + filtro + "'";
+                            consulta += "C.Descripcion like '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "A.Nombre like '%" + filtro + "%'";
+                            consulta += "C.Descripcion like '%" + filtro + "%'";
                             break;
                     }
                 }             
@@ -238,14 +238,14 @@ namespace Negocio
                 {
                     switch (criterio)
                     {
-                        case "Mayor a":
-                            consulta += "A.Precio > " + filtro;
+                        case "Comienza con":
+                            consulta += "M.Descripcion like '" + filtro + "%'";
                             break;
-                        case "Menor a":
-                            consulta += "A.Precio < " + filtro;
+                        case "Termina con":
+                            consulta += "M.Descripcion like '%" + filtro + "'";
                             break;
                         default:
-                            consulta += "A.Precio = " + filtro;
+                            consulta += "M.Descripcion like '%" + filtro + "%'";
                             break;
                     }
                 }
@@ -269,6 +269,7 @@ namespace Negocio
                         aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
                     aux.Precio = datos.Lector.IsDBNull(datos.Lector.GetOrdinal("Precio")) ? 0m : datos.Lector.GetDecimal(datos.Lector.GetOrdinal("Precio"));
 
+                    
                     lista.Add(aux);
                 }
                 return lista;

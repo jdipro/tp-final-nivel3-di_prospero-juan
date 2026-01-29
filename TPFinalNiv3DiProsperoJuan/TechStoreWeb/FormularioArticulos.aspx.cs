@@ -143,8 +143,7 @@ namespace TechStoreWeb
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
-                throw;
+                Session.Add("error", ex);    
             }
         }
 

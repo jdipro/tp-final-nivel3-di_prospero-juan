@@ -7,14 +7,15 @@
             <h2>Login</h2>
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <asp:TextBox runat="server" cssclass="form-control" REQUIRED ID="txtEmail"/>
+                <asp:TextBox runat="server" cssclass="form-control" placeholder="e-mail" ID="txtEmail"/>
             </div>
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <asp:TextBox runat="server" cssclass="form-control" ID="txtPassword" TextMode="Password"/>
+                <asp:TextBox runat="server" cssclass="form-control" placeholder="********" ID="txtPassword" TextMode="Password"/>
             </div>
             <asp:Button Text="Ingresar" cssclass="btn btn-primary" ID="btnLogin" OnClick="btnLogin_Click" runat="server" />
             <a href="/">Cancelar</a>
+            
 
         </div>
     </div>

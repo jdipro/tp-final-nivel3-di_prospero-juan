@@ -71,6 +71,22 @@ namespace Negocio
             }
         }
 
+        //Lógica para obtener el Id (int) de los artículos de la DB.
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString()); //devuelve la primer columna. Se castea para que devuelva un int.
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         //Seteo de parametros para el método Agregar() en la clase ArticuloNegocio.
         public void setearParametro(string nombre, object valor )
         {
