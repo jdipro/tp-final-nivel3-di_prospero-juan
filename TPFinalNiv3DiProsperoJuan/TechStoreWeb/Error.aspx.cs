@@ -16,5 +16,11 @@ namespace TechStoreWeb
                 lblError.Text = Session["error"].ToString();
             }
         }
+
+        protected void btnvolverLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
+
+        }
     }
 }

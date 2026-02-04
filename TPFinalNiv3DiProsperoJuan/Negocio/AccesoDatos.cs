@@ -87,7 +87,7 @@ namespace Negocio
             }
         }
 
-        //Seteo de parametros para el método Agregar() en la clase ArticuloNegocio.
+        //Seteo de parametros para el método Agregar()  en la clase ArticuloNegocio y Actualizar() UsersNegocio.
         public void setearParametro(string nombre, object valor )
         {
             comando.Parameters.AddWithValue(nombre, valor);

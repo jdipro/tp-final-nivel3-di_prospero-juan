@@ -37,7 +37,8 @@ namespace TechStoreWeb
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
         }
     }

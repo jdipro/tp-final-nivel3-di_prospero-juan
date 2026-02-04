@@ -11,17 +11,17 @@ namespace Dominio
     public class Users
     {
         public int Id { get; set; }
-        private string email;
+        private string email; //validación Email
 
-        public string Email
+        public string Email //validación Email
         {
-            get { return email; }
+            get { return email; } 
             set 
             {
                 if (value != "")
                     email = value;
                 else
-                    throw new Exception("email vacío en el dominio...");
+                    throw new Exception("el campo Email está vacío");
             }
         }
 

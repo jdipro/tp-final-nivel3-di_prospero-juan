@@ -32,7 +32,8 @@ namespace TechStoreWeb
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
 
 
@@ -43,7 +44,9 @@ namespace TechStoreWeb
         {
             try
             {
-
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
 
                 UsersNegocio negocio = new UsersNegocio();
                 Users usuario = (Users)Session["usuario"];
@@ -68,7 +71,8 @@ namespace TechStoreWeb
             catch (Exception ex)
             {
 
-                Session.Add("error", ex.ToString());
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
         }
     }

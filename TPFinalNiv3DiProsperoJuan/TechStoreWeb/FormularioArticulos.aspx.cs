@@ -77,8 +77,8 @@ namespace TechStoreWeb
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
-                throw;
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
 
         }
@@ -143,7 +143,8 @@ namespace TechStoreWeb
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);    
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
         }
 
@@ -175,7 +176,8 @@ namespace TechStoreWeb
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
+                Session.Add("error", Seguridad.manejoError(ex));
+                Response.Redirect("error.aspx");
             }
         }
     }

@@ -1,5 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master.Master" AutoEventWireup="true" CodeBehind="FormularioArticulos.aspx.cs" Inherits="TechStoreWeb.FormularioArticulos" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validacion{
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
@@ -12,10 +19,12 @@
             <div class="mb-3">
                 <label for="txtCodigo" class="form-label">Código: </label>
                 <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
+                <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="El nombre es requerido" ControlToValidate="txtCodigo" runat="server" />
             </div>
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre: </label>
                 <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                <asp:RequiredFieldValidator CssClass="validacion" ErrorMessage="El nombre es requerido" ControlToValidate="txtNombre" runat="server" />
             </div>
             <div class="mb-3">
                 <label for="ddlCategoria" class="form-label">Categoria: </label>
@@ -41,9 +50,9 @@
                 <label for="txtPrecio" class="form-label">Precio: </label>
                 <asp:TextBox runat="server"  ID="txtPrecio" CssClass="form-control" MaxLength="15" placeholder="Ej: 00.000,00" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecio" ErrorMessage="El precio es obligatorio." 
-                 CssClass="text-danger" Display="Dynamic" />
+                 CssClass="validacion" Display="Dynamic" />
                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPrecio" ErrorMessage="Formato válido: 00.000,00"
-                CssClass="text-danger" Display="Dynamic" ValidationExpression="^\d{1,3}(\.\d{3})*(,\d{2})$" />
+                CssClass="validacion" Display="Dynamic" ValidationExpression="^\d{1,3}(\.\d{3})*(,\d{2})$" />
             
             </div>
 
