@@ -39,7 +39,7 @@
                     </ul>
                  </div>
                  <div class="d-flex">
-                    <% if (!Negocio.Seguridad.sesionActiva(Session["user"])){ %>
+                    <% if (!Negocio.Seguridad.sesionActiva(Session["usuario"])){ %>
                             <a href="Login.aspx" class="btn btn-success me-2">Login</a>
                             <a href="Registro.aspx" class="btn btn-outline-primary m-auto">Registrarse</a>
                     <%

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
+using Mail;
 
 
 
@@ -26,7 +27,7 @@ namespace TechStoreWeb
             try
             {
 
-                if(Validacion.validaTextoVacio(txtEmail) || Validacion.validaTextoVacio(txtPassword)) //validación para evitar campos vacíos a través de clase Validacion.
+                if(Validacion.validaTextoVacio(txtEmail.Text) || Validacion.validaTextoVacio(txtPassword.Text)) //validación para evitar campos vacíos a través de clase Validacion.
                 {
                     Session.Add("error", "Los campos Email y Password deben estar completos para seguir.");
                     Response.Redirect("Error.aspx");

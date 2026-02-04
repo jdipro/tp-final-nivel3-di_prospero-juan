@@ -33,7 +33,7 @@
                 <label class="form-label">Email</label>
                 <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" placeholder="xxxx@xxxx.com"/>
                 <asp:RequiredFieldValidator ErrorMessage="El Email es requerido" CcsClas="validacion" ControlToValidate="txtEmail" runat="server" ValidationGroup="validacion_1" />
-                <asp:RegularExpressionValidator ErrorMessage="la entrada debe tener formato de E-mail" ControlToValidate="txtEmail" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" runat="server" CcsClass="validacion" ValidationGroup="validacion_1"/>
+                <asp:RegularExpressionValidator ErrorMessage="la entrada debe tener formato de E-mail" ControlToValidate="txtEmail" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" runat="server" CcsClass="validacion" />
                 
 
             </div>

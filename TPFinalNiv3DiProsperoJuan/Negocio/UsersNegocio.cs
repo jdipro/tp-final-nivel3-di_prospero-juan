@@ -57,7 +57,7 @@ namespace Negocio
                         usuario.Nombre = (string)datos.Lector["nombre"];
                     if (!(datos.Lector["apellido"] is DBNull))
                         usuario.Apellido = (string)datos.Lector["apellido"];
-                    if (!(datos.Lector["imagenPerfil"] is DBNull))
+                    if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.urlImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
 
                     return true;
