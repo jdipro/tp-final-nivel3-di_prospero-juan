@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ArticulosLista.aspx" />
+    <Content Include="Contacto.aspx" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Favoritos.aspx" />
@@ -86,6 +87,13 @@
     </Compile>
     <Compile Include="ArticulosLista.aspx.designer.cs">
       <DependentUpon>ArticulosLista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleArticulo.aspx.cs">
       <DependentUpon>DetalleArticulo.aspx</DependentUpon>
@@ -174,6 +182,10 @@
     <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{a2fa4a2b-8ab1-489d-b4e6-706329355f49}</Project>
       <Name>Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mail\Mail.csproj">
+      <Project>{995dac49-01af-4e02-b175-f42d887410ee}</Project>
+      <Name>Mail</Name>
     </ProjectReference>
     <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{a7199bec-f4a6-4eff-bee5-1f5229640ded}</Project>

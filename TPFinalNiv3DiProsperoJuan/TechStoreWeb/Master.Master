@@ -28,6 +28,9 @@
                             <a class="nav-link" href="ArticulosLista.aspx">Lista de Artículos</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="Contacto.aspx">Contacto</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="Favoritos.aspx">Favoritos</a>
                         </li>
                         <li class="nav-item">

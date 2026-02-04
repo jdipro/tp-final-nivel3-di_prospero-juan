@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 
-namespace Negocio
+namespace Mail
 {
     public class EmailService
     {
@@ -16,10 +16,10 @@ namespace Negocio
         public EmailService() //con el accedo de Pokedex Web realizado en el curso.
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("ff01e6ec42e120", "78e6c7a7b640fb");
+            server.Credentials = new NetworkCredential("a7fdbe6ad9248a", "bbd2a8e3ba5a71");
             server.EnableSsl = true;
             server.Port = 2525;
-            server.Host = "smtp.mailtrap.io";
+            server.Host = "sandbox.smtp.mailtrap.io";
         }
 
         public void armarCorreo(string emailDestino, string asunto, string cuerpo)

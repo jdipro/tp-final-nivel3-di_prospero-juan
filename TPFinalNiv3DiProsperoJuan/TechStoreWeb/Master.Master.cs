@@ -14,7 +14,7 @@ namespace TechStoreWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             imgAvatar.ImageUrl = "https://simg.nicepng.com/png/small/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png";
-            if (!(Page is LogIn || Page is Registro || Page is Home || Page is Error))
+            if (!(Page is LogIn || Page is Registro || Page is Home || Page is Contacto || Page is Error))
             {
                 //Para que accedan sólo los perfiles logeados:
                 if (!Seguridad.sesionActiva(Session["usuario"]))
