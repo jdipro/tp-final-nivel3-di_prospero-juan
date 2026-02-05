@@ -20,6 +20,14 @@ namespace TechStoreWeb
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
+            //Validación para evitar campos txtEmail y txtPassword vacíos.
+
+            if (!Validacion.validaTextoVacio(txtEmail) || !Validacion.validaTextoVacio(txtPassword)) //validación para evitar campos vacíos a través de clase Validacion.
+            {
+                    Session.Add("error", "Los campos Email y Password deben estar completos para seguir.");
+                    Response.Redirect("Error.aspx");
+                return;
+            }
             try
             {
                 Users usuario = new Users();
@@ -33,9 +41,10 @@ namespace TechStoreWeb
 
                 emailService.armarCorreo(usuario.Email, "Bienvenido Usuario", "Bienvenido a TechStore Web");
                 emailService.enviarEmail();
+                
                 Response.Redirect("Home.aspx", false);
-
             }
+            catch (System.Threading.ThreadAbortException) { }
             catch (Exception ex)
             {
                 Session.Add("error", Seguridad.manejoError(ex));

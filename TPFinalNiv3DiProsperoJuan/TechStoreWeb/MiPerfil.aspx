@@ -17,6 +17,11 @@
                 txtApellido.classList.remove("is-valid");
                 txtNombre.classList.add("is-valid");
                 return false;
+            } else if (txtNombre.value == "") {
+                txtNombre.classList.add("is-invalid");
+                txtNombre.classList.remove("is-valid");
+                txtApellido.classList.add("is-valid");
+                return false;
             }
             txtApellido.classList.remove("is-invalid");
             txtApellido.classList.add("is-valid");

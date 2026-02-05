@@ -31,6 +31,8 @@ namespace TechStoreWeb
 
                 // Limpiar campos.
                 txtEmail.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtApellido.Text = string.Empty;
                 txtAsunto.Text = string.Empty;
                 txtMensaje.Text = string.Empty;
 
@@ -40,6 +42,11 @@ namespace TechStoreWeb
             {
                 Session.Add("error", ex);
             }
+        }
+
+        protected void btnHome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Home.aspx");
         }
     }
 }

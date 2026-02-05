@@ -7,20 +7,31 @@
         }
     </style>
     <script>
-        function validarLogin() {
-
-            //capturar el control. 
+        function validarLogIn() {
             const txtEmail = document.getElementById("txtEmail");
             const txtPassword = document.getElementById("txtPassword");
-            if (txtEmail.value == "") {
+
+            let valido = true;
+
+            if (txtEmail.value.trim() === "") {
                 txtEmail.classList.add("is-invalid");
                 txtEmail.classList.remove("is-valid");
-                txtPassword.classList.add("is-valid");
-                return false;
+                valido = false;
+            } else {
+                txtEmail.classList.remove("is-invalid");
+                txtEmail.classList.add("is-valid");
             }
-            txtEmail.classList.remove("is-invalid");
-            txtEmail.classList.add("is-valid");
-            return true;
+
+            if (txtPassword.value.trim() === "") {
+                txtPassword.classList.add("is-invalid");
+                txtPassword.classList.remove("is-valid");
+                valido = false;
+            } else {
+                txtPassword.classList.remove("is-invalid");
+                txtPassword.classList.add("is-valid");
+            }
+
+            return valido;
         }
     </script>
 </asp:Content>
@@ -31,15 +42,15 @@
             <h2>Login</h2>
             <div class="mb-3">                            
                 <label class="form-label">Email</label>
-                <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" placeholder="xxxx@xxxx.com"/>
+                <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" ClientIDMode="Static" placeholder="xxxx@xxxx.com"/>
                 <asp:RequiredFieldValidator ErrorMessage="El Email es requerido" CcsClas="validacion" ControlToValidate="txtEmail" runat="server"  />
                 <asp:RegularExpressionValidator ErrorMessage="la entrada debe tener formato de E-mail" ControlToValidate="txtEmail" ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" runat="server" CcsClass="validacion"/>           
             </div>
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <asp:TextBox runat="server" cssclass="form-control" placeholder="********" ID="txtPassword" TextMode="Password"/>
+                <asp:TextBox runat="server" cssclass="form-control" placeholder="********" ID="txtPassword" ClientIDMode="Static" TextMode="Password"/>
             </div>
-            <asp:Button Text="Ingresar" cssclass="btn btn-primary" ID="btnLogin" OnClientClick="return validarLogin()"  OnClick="btnLogin_Click" runat="server" />
+            <asp:Button Text="Ingresar" cssclass="btn btn-primary" ID="btnLogin" OnClientClick="return validarLogIn()"  OnClick="btnLogin_Click" runat="server" />
             <a href="/">Cancelar</a>
             
 
