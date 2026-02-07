@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient; //hacer uso de funcionalidades relacionadas con la red (por ejemplo, descargando datos desde una API, enviando correos electrónicos, o similar). 
 using Dominio;
-
+using System.Configuration;
 
 namespace Negocio
 {
@@ -353,6 +353,45 @@ namespace Negocio
             catch (Exception ex)
             {
                 Console.WriteLine($"Error al conectarse a la base de datos para eliminar un artículo: {ex.Message}");
+            }
+        }
+
+
+        //Lógica para cargar los artículos por Id en Favoritos.
+
+        public List<Articulo> ListarPorIds(List<int> id)
+        {
+            List<Articulo> lista = new List<Articulo>();  
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string idSql = string.Join(",", id);
+                datos.setearConsulta($@"SELECT Id, Nombre, Descripcion, Precio, ImagenUrl FROM ARTICULOS WHERE Id IN ({idSql}) ");
+
+                if (id == null || id.Count == 0)
+                    return lista;
+                
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulo art = new Articulo();
+                    
+                    art.Id = (int)datos.Lector["Id"];
+                    art.Nombre = datos.Lector["Nombre"].ToString();
+                    art.Descripcion = datos.Lector["Descripcion"].ToString();
+                    art.Precio = (decimal)datos.Lector["Precio"];
+                    art.ImagenUrl = datos.Lector["ImagenUrl"].ToString();
+                    
+                    lista.Add(art);
+                }
+                
+                return lista;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
