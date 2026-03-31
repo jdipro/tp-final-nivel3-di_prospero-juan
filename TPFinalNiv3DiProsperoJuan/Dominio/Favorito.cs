@@ -7,7 +7,15 @@ using System.ComponentModel;
 
 namespace Dominio
 {
-    class Favorito
+    public class Favorito
     {
+        public int Id { get; set; }
+
+        public int IdUser { get; set; }
+
+        public int IdArticulo { get; set; }
+
+
+
     }
 }

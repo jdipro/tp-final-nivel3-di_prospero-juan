@@ -7,7 +7,7 @@ using System.ComponentModel; //esta biblioteca me permite usar DisplayName -> se
 
 namespace Dominio
 {
-    //Lógica para tomar las columnas de la tabla Articulos de la db y anezar de la tabla Marca y Categoria.
+    //Lógica para tomar las columnas de la tabla Articulos de la db y anexar de la tabla Marca y Categoria.
     public class Marca
     {
        
