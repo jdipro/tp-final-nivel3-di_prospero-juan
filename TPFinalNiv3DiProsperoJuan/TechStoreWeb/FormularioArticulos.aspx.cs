@@ -78,7 +78,7 @@ namespace TechStoreWeb
             {
 
                 Session.Add("error", Seguridad.manejoError(ex));
-                Response.Redirect("error.aspx");
+                Response.Redirect("Error.aspx");
             }
 
         }

@@ -19,8 +19,6 @@
                                 <p class="card-text"><%#Eval("Descripcion") %></p>
                                 <p class="card-text"><%#Eval("Precio") %></p>
 
-                                <a href="DetalleArticulo.aspx?id=<%#Eval("Id") %>">Info</a>
-
                                 <asp:LinkButton ID="btnFavorito" runat="server" CssClass="btn btn-sm ms-2" CommandArgument='<%# Eval("Id") %>' 
                                     OnCommand="btnFavorito_Command" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.blur();" >
 

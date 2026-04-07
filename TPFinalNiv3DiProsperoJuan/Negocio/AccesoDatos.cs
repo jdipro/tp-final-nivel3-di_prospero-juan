@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 
+
+
+
+
 namespace Negocio
 {
     //Lógica para habilitar la posibilidad de conexión a la DB.
@@ -22,7 +26,8 @@ namespace Negocio
         //Lógica para realizar conexión a la DB.
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
+            conexion = new SqlConnection(ConfigurationManager.AppSettings["cadenaConexion"]);
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
             comando = new SqlCommand(); 
         }
 
